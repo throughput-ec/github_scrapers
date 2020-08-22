@@ -128,4 +128,5 @@ for db in dbs:
         addcheck = """MATCH (obb:OBJECT)
                       WHERE obb.AwardID = $otid
                       SET obb.checked = timestamp()"""
+        repElem = {'otid': db['ob']['AwardID']}
         silent = graph.run(addcheck, repElem)

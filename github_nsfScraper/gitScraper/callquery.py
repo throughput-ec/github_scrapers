@@ -68,11 +68,15 @@ def callquery(g, query, silent=False):
                 print("     " + str(i) + ' ' + res.full_name
                       + ' (remaining GitHub API calls: '
                       + str(left.core.remaining) + ')')
+            try:
+                topics = res.topics
+            except Exception:
+                topics = None
             repo = {'id': res.id,
                     'name': res.full_name,
                     'url': res.html_url,
                     'description': res.description,
-                    'keywords': res.topics}
+                    'keywords': topics}
             i = i + 1
             resset.add(dumps(repo))
         else:

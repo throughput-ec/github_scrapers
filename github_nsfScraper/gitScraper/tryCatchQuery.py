@@ -5,7 +5,11 @@ from time import sleep
 
 
 def tryCatchQuery(g, parent, query):
+    k = 1
     while True:
+        if k > 10:
+            libcall = []
+            break
         try:
             libcall = callquery(g, query)
             break
@@ -14,11 +18,13 @@ def tryCatchQuery(g, parent, query):
             print('Oops, broke for ' + parent
                   + ' with library call.')
             sleep(120)
+            k = k + 1
             continue
         except Exception as inst:
             print("Unexpected error:", str(inst))
             print('Oops, broke for ' + parent
                   + ' with library call.')
             sleep(120)
+            k = k + 1
             continue
     return libcall
