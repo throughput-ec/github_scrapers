@@ -1,0 +1,10 @@
+{"query": "\"NSF  1541002\" in:file", "text": [" and Neotoma data stewards. Work on this paper was supported by NSF Awards NSF-1541002, NSF-1550707"]}
+{"query": "\"NSF  1541002\" in:file", "text": [" Paleoecology Database and Neotoma data stewards. Work on this paper was supported by NSF Awards NSF-1541002, NSF-1550707 and NSF-1550707.\n\n# REFERENCES\n"]}
+{"query": "\"NSF  1541002\" in:file", "text": [" and Neotoma data stewards. Work on this paper was supported by NSF Awards NSF-1541002, NSF-1550707"]}
+{"query": "\"NSF  1541002\" in:file", "text": [" Paleoecology Database and Neotoma data stewards. Work on this paper was supported by NSF Awards NSF-1541002, NSF-1550707 and NSF-1550707.\n\n# REFERENCES\n"]}
+{"query": "\"NSF  1541002\" in:file", "text": [" paper was supported by NSF Awards NSF-1541002, NSF-1550707 and NSF-1550707.</p>\n<h2 id=\"references"]}
+{"query": "\"NSF  1541002\" in:file", "text": [" supported through NSF Grants NSF-1541002, NSF-1550855, NSF-1241868, and NSF-1550707.  This paper was"]}
+{"query": "\"NSF  1541002\" in:file", "text": [" Grants NSF-1541002, NSF-1550855, NSF-1241868, and NSF-1550707.  This paper was improved through"]}
+{"query": "\"NSF 1541002\" in:file", "text": [" and Neotoma data stewards. Work on this paper was supported by NSF Awards NSF-1541002, NSF-1550707"]}
+{"query": "\"NSF 1541002\" in:file", "text": [" and Neotoma data stewards. Work on this paper was supported by NSF Awards NSF-1541002, NSF-1550707"]}
+{"query": "\"NSF 1541002\" in:file", "text": [" and Neotoma data stewards. Work on this paper was supported by NSF Awards NSF-1541002, NSF-1550707"]}

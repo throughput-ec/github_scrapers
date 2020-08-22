@@ -1,0 +1,119 @@
+{"query": "\"NSF 1541002\" in:file", "text": [" and Neotoma data stewards. Work on this paper was supported by NSF Awards NSF-1541002, NSF-1550707"]}
+{"query": "\"NSF 1541002\" in:file", "text": [" Paleoecology Database and Neotoma data stewards. Work on this paper was supported by NSF Awards NSF-1541002, NSF-1550707 and NSF-1550707.\n\n# REFERENCES\n"]}
+{"query": "\"NSF 1541002\" in:file", "text": [" paper was supported by NSF Awards NSF-1541002, NSF-1550707 and NSF-1550707.</p>\n<h2 id=\"references"]}
+{"query": "\"NSF 1541002\" in:file", "text": [" supported through NSF Grants NSF-1541002, NSF-1550855, NSF-1241868, and NSF-1550707.  This paper was"]}
+{"query": "\"NSF 1541002\" in:file", "text": [" Grants NSF-1541002, NSF-1550855, NSF-1241868, and NSF-1550707.  This paper was improved through"]}
+{"query": "\"NSF 1541002\" in:file", "text": [" and Neotoma data stewards. Work on this paper was supported by NSF Awards NSF-1541002, NSF-1550707"]}
+{"query": "\"NSF 1541002\" in:file", "text": [" and Neotoma data stewards. Work on this paper was supported by NSF Awards NSF-1541002, NSF-1550707"]}
+{"query": "\"NSF 1541002\" in:file", "text": [" Paleoecology Database and Neotoma data stewards. Work on this paper was supported by NSF Awards NSF-1541002, NSF-1550707 and NSF-1550707.\n\n# REFERENCES\n"]}
+{"query": "\"NSF 1541002\" in:file", "text": [" paper was supported by NSF Awards NSF-1541002, NSF-1550707 and NSF-1550707.</p>\n<h2 id=\"references"]}
+{"query": "\"NSF 1541002\" in:file", "text": [" supported through NSF Grants NSF-1541002, NSF-1550855, NSF-1241868, and NSF-1550707.  This paper was"]}
+{"query": "\"NSF 1541002\" in:file", "text": [" Grants NSF-1541002, NSF-1550855, NSF-1241868, and NSF-1550707.  This paper was improved through"]}
+{"query": "\"NSF 1541002\" in:file", "text": [" and Neotoma data stewards. Work on this paper was supported by NSF Awards NSF-1541002, NSF-1550707"]}
+{"query": "\"NSF 1835209\" in:file", "text": [">\n</ProgramOfficer>\n<AbstractNarration>NSF 1835209&lt;br/&gt;NCS-FO: Modeling Individual Differences in"]}
+{"query": "\"NSF 1835209\" in:file", "text": [">\n</ProgramOfficer>\n<AbstractNarration>NSF 1835209&lt;br/&gt;NCS-FO: Modeling Individual Differences in"]}
+{"query": "\"NSF 1652052\" in:file", "text": [" supported by ONR N00014-13-1-0720, NSF\nIIS-1338054, NSF IIS-1748387, NSF IIS-1751206, NSF-1652052"]}
+{"query": "\"NSF 1652052\" in:file", "text": [", NSF\nIIS-1338054, NSF IIS-1748387, NSF IIS-1751206, NSF-1652052, NRI-1637479, ARO YIP"]}
+{"query": "\"NSF 1652052\" in:file", "text": [" supported by ONR N00014-13-10720, ONR MURI N00014-16-1-2007, NSF IIS-1338054, NSF-1652052"]}
+{"query": "\"NSF 1652052\" in:file", "text": [" National Science\nFoundation under contract number NSF-NRI-1637479,\nNSF-IIS-1338054, NSF-1652052, ONR", "\nFoundation under contract number NSF-NRI-1637479,\nNSF-IIS-1338054, NSF-1652052, ONR N00014-13-1-\n0720"]}
+{"query": "\"NSF 1664162\" in:file", "text": [" Analysis Software & Systems (ADASS)},\n  year = {2018},\n  note = {Funding Acknowledgments: NSF 1664162"]}
+{"query": "\"NSF 1764421\" in:file", "text": [" (T32CA080621, RB; R35GM118144, RWC), NSF (1764421, MM and RWC), and the Simons Foundation (597491, MM"]}
+{"query": "\"NSF 1764421\" in:file", "text": ["), Chancellor\u2019s Fellowship of University of Edinburgh (DKP), NIH (R35GM118144, RWC), NSF (1764421, MM and"]}
+{"query": "\"NSF 1632227\" in:file", "text": ["\n    + NSF 1632227; KAUST OSR-2015-CRG4-2582\n- **My mentors**: Dean Young, Amanda Hering, James Stamey"]}
+{"query": "\"NSF 1632227\" in:file", "text": [" Melissa Johnson\n    + NSF 1632227; KAUST OSR-2015-CRG4-2582\n- **My mentors**: Dean Young, Amanda Hering"]}
+{"query": "\"NSF 1740694\" in:file", "text": [")](https://nsf.gov/awardsearch/showAward?AWD_ID=1241868) [![NSF-1740694](https://img.shields.io/badge", "/NSF-1740694-blue.svg)](https://nsf.gov/awardsearch/showAward?AWD_ID=1740694)\n\n\n# Bulk Baconizing\n\nFor"]}
+{"query": "\"NSF 1759224\" in:file", "text": ["&HistoricalAwards=false\">NSF #1759224</a>) project aims to address the lack of diversity in STEM fields by"]}
+{"query": "\"NSF 1642090\" in:file", "text": ["(\n                    [\"NSF 1642070\", \"NSF 1642053\", \"NSF 1642090\"])\n                article_fields[\"tags\"].append(\"swip"]}
+{"query": "\"NSF 1638554\" in:file", "text": ["/badge/NSF-1065818-blue.svg)](https://nsf.gov/awardsearch/showAward?AWD_ID=1065818) [![NSF-1638554", "](https://img.shields.io/badge/NSF-1638554-blue.svg)](https://nsf.gov/awardsearch/showAward?AWD_ID"]}
+{"query": "\"NSF 1638554\" in:file", "text": ["/showAward?AWD_ID=1065818)\n[![NSF-1638554](https://img.shields.io/badge/NSF-1638554-blue.svg)](https"]}
+{"query": "\"NSF 1839136\" in:file", "text": ["\" post=\"(NSF) 1839136 Mayhall Nicholas J. Introduction Anticipation that a\"/>\r\n <result pre=\"the US"]}
+{"query": "\"NSF 1839136\" in:file", "text": ["://doi.org/10.13039/100000001\" exact=\"National Science Foundation\" post=\"(NSF) 1839136 Mayhall"]}
+{"query": "\"NSF 1839136\" in:file", "text": ["\" exact=\"National Science Foundation\" post=\"(NSF) 1839136 Mayhall Nicholas J. Introduction"]}
+{"query": "\"NSF 1649208\" in:file", "text": [" research was supported by Intel Corporation, NSF\n(#1649208, #1651565, #1522054) and Future of Life"]}
+{"query": "\"NSF 1649208\" in:file", "text": [" complex\nstructures.\n\n8. Acknowledgement\nThis research was supported by Intel Corporation, NSF", "\n(#1649208, #1651565, #1522054) and Future of Life In-\nstitute (#2016-158687).\n\nReferences\nBachman, Philip"]}
+{"query": "\"NSF 1649208\" in:file", "text": [" complex\nstructures.\n\n8. Acknowledgement\nThis research was supported by Intel Corporation, NSF", "\n(#1649208, #1651565, #1522054) and Future of Life In-\nstitute (#2016-158687).\n\nReferences\nBachman, Philip"]}
+{"query": "\"NSF 1649208\" in:file", "text": [" research was supported by Intel Corporation, NSF\r\n(#1649208, #1651565, #1522054) and Future of Life In-"]}
+{"query": "\"NSF 1925083\" in:file", "text": ["=\"https://www.nsf.gov/awardsearch/showAward?AWD_ID=1925083&HistoricalAwards=false\">NSF #1925083"]}
+{"query": "\"NSF 1901456\" in:file", "text": ["/badge/NSF-1901456-informational)](https://www.nsf.gov/awardsearch/showAward?AWD_ID=1901456"]}
+{"query": "\"NSF 1901456\" in:file", "text": [" 1901456](https://img.shields.io/badge/NSF-1901456-informational)](https://www.nsf.gov/awardsearch"]}
+{"query": "\"NSF 1901456\" in:file", "text": [" NSF 1901456.\n\nWe welcome contributions of all kinds from filing issues and bug or typo fixes to"]}
+{"query": "\"NSF 1901456\" in:file", "text": [" Grant 1901456](https://img.shields.io/badge/NSF-1901456-informational)](https://www.nsf.gov"]}
+{"query": "\"NSF 1901456\" in:file", "text": ["/NSF-1901456-informational)](https://www.nsf.gov/awardsearch/showAward?AWD_ID=1901456)\n\n<img src"]}
+{"query": "\"NSF 1547428\" in:file", "text": [": Secure Trans- port and REsearch Architecture for Monitoring Stroke Recovery.\n* Award number: NSF", " #1547428\n* Amount: $515,858.00\n\n------\n\n##### NSF 14-547 I-Corps\n* Entrepreneur Lead and proposal writer"]}
+{"query": "\"NSF 1547428\" in:file", "text": [".\n* Award number: NSF #1547428\n* Amount: $515,858.00\n\n------\n\n##### NSF 14-547 I-Corps\n* Entrepreneur"]}
+{"query": "\"NSF 1547428\" in:file", "text": [" Stroke Recovery.</li>\n<li>Award number: NSF #1547428</li>\n<li>Amount: $515,858.00</li>\n</ul>\n<hr"]}
+{"query": "\"NSF 1935548\" in:file", "text": [" Multi-Functional Modular Sensing Systems in the Soil</a></strong>\n<br/>\nNSF 1935548\n<br/>\nPI: Chlo\u00e9 Arson<br"]}
+{"query": "\"NSF 1835473\" in:file", "text": [";&nbsp;Supported by NSF under Grant No. NSF-1835473  \n-&nbsp;&emsp;&nbsp;Develop a visual data"]}
+{"query": "\"NSF 1550588\" in:file", "text": ["| |docs| |NSF-1550588|\n\nParsl is a parallel programming library for Python. Parsl augments Python with", ".readthedocs.io/en/stable/?badge=stable\n   :alt: Documentation Status\n.. |NSF-1550588| image:: https"]}
+{"query": "\"NSF 1550588\" in:file", "text": [" Parsl: A Python Parallel Scripting Library](http://doi.org/10.5281/zenodo.853491). Zenodo. http://doi.org/10.5281/zenodo.853491.\n\nFunding\n\n- NSF 1550588\n"]}
+{"query": "\"NSF 1550588\" in:file", "text": [" (NSF 1550588)\n * <a href=\"https://www.funcx.org\">funcX</a>: distributed function as a service platform"]}
+{"query": "\"NSF 1550588\" in:file", "text": [" Project [48] (DOE Contract DE-AC02-06CH11357); Parsl: parallel scripting library [49] (NSF 1550588"]}
+{"query": "\"NSF 1550588\" in:file", "text": [" Project [48] (DOE Contract DE-AC02-06CH11357); Parsl: parallel scripting library [49] (NSF 1550588"]}
+{"query": "\"NSF 1550588\" in:file", "text": [" Project [48] (DOE Contract DE-AC02-06CH11357); Parsl: parallel scripting library [49] (NSF 1550588"]}
+{"query": "\"NSF 1550588\" in:file", "text": [" Project [48] (DOE Contract DE-AC02-06CH11357); Parsl: parallel scripting library [49] (NSF 1550588"]}
+{"query": "\"NSF 1550588\" in:file", "text": [" Project [48] (DOE Contract DE-AC02-06CH11357); Parsl: parallel scripting library [49] (NSF 1550588"]}
+{"query": "\"NSF 1550588\" in:file", "text": ["://parsl-project.org\">Parsl</a>: parallel scripting libarary (NSF 1550588)\n * <a href=\"https://www.funcx.org"]}
+{"query": "\"NSF 1550588\" in:file", "text": [" Project [48] (DOE Contract DE-AC02-06CH11357); Parsl: parallel scripting library [49] (NSF 1550588"]}
+{"query": "\"NSF 1550588\" in:file", "text": [" Project [48] (DOE Contract DE-AC02-06CH11357); Parsl: parallel scripting library [49] (NSF 1550588"]}
+{"query": "\"NSF 1550588\" in:file", "text": [" Project [48] (DOE Contract DE-AC02-06CH11357); Parsl: parallel scripting library [49] (NSF 1550588"]}
+{"query": "\"NSF 1550588\" in:file", "text": [" Project [48] (DOE Contract DE-AC02-06CH11357); Parsl: parallel scripting library [49] (NSF 1550588"]}
+{"query": "\"NSF 1560727\" in:file", "text": [" within Geographic Context\u201d. Research Assistant. Columbus, Ohio. May 11-12, 2017. (NSF #1560727", " Assistant. Austin, Texas. Nov. 10-11, 2016. (NSF #1560727).\r\n\r\n                    Hoover, Brendan"]}
+{"query": "\"NSF 1651565\" in:file", "text": [" question.\n\n8\n\nThis research was supported by Intel, TRI, NSF (#1651565, #1522054, #1733686), and ONR", ".\n\n8\n\nThis research was supported by Intel, TRI, NSF (#1651565, #1522054, #1733686), and ONR"]}
+{"query": "\"NSF 1815238\" in:file", "text": ["---\nlayout: main-no-sidebar\ntitle: \"NSF 1815238 -- III: Small: An end-to-end pipeline for", ", 2018 -- August 31st, 2021.\n\n* NSF Information: [award page, NSF-1815238](https://www.nsf.gov"]}
+{"query": "\"NSF 1659585\" in:file", "text": [" supported by a post-doctoral grant from the Fyssen Foundation, NSF #1528526, and NSF #1659585"]}
+{"query": "\"NSF 1659585\" in:file", "text": [" \\#1528526, and NSF \\#1659585.\n\n\\section{References}\\label{references}\n\n\\setlength{\\parindent}{-0.1in"]}
+{"query": "\"NSF 1659585\" in:file", "text": [" Foundation, NSF #1528526, and NSF #1659585.\n-->\n\n# References \n\n```{r}\n# References will be generated"]}
+{"query": "\"NSF 1659585\" in:file", "text": [" #1528526, and NSF #1659585.\n\n\n# Disclosure statement\nNone of the authors have any financial interest or"]}
+{"query": "\"NSF 1659585\" in:file", "text": [" from the Fyssen Foundation, NSF \\#1528526, and NSF \\#1659585.\n\n\\hypertarget{disclosure-statement"]}
+{"query": "\"NSF 1831698\" in:file", "text": [" part through National Science Foundation Smart \\& Connected Communities award NSF-1831698 and through an NSF Graduate Research Fellowship. \n"]}
+{"query": "\"NSF 1815485\" in:file", "text": [" genome-wide ...''\n \\$549k ~\n \\hfill 2019\\\\\n      NSF-1815485 :  ``III: SMALL: New algorithms for genome"]}
+{"query": "\"NSF 1912719\" in:file", "text": [" acknowledges the National Science Foundation under Grant No. NSF-1912719. \nF.~Bishara acknowledges"]}
+{"query": "\"NSF 1645102\" in:file", "text": [".\r\rAcknowledgments\r\rThe work is funded by NSF #1645102. We would like to acknowledge the loving and"]}
+{"query": "\"NSF 1645102\" in:file", "text": [".\r\rAcknowledgments\r\rThe work is funded by NSF #1645102. We would like to acknowledge the loving and"]}
+{"query": "\"NSF 1645047\" in:file", "text": [")   \n-&nbsp;&emsp;&nbsp;Supported by NSF under Grant No. NSF-1645047   \n-&nbsp;&emsp;&nbsp;Develop"]}
+{"query": "\"NSF 1852977\" in:file", "text": [">\n        </role>\n    </name>\n    <note type=\"funding\">National Science Foundation (NSF): 1852977</note"]}
+{"query": "\"NSF 1948857\" in:file", "text": ["://nsf.gov/awardsearch/showAward?AWD_ID=1948994)\r\n[![NSF-1948857](https://img.shields.io/badge", "/NSF-1948857-blue.svg)](https://nsf.gov/awardsearch/showAward?AWD_ID=1948857)\r\n\r\nVertical differencing in"]}
+{"query": "\"NSF 1948857\" in:file", "text": ["://nsf.gov/awardsearch/showAward?AWD_ID=1948994)\n[![NSF-1948857](https://img.shields.io/badge", "/NSF-1948857-blue.svg)](https://nsf.gov/awardsearch/showAward?AWD_ID=1948857)\n\n\n\nMeasuring change at the"]}
+{"query": "\"NSF 1651393\" in:file", "text": [" National Science Foundation (NSF 1651393).\n\n# Field-Line Tracing\nThe International Geomagnetic"]}
+{"query": "\"NSF 1640818\" in:file", "text": [" Foundation (\\#2018-0907).\n\nAshish Mahabal acknowledges support from the NSF (1640818, AST-1815034"]}
+{"query": "\"NSF 1550707\" in:file", "text": [" and Neotoma data stewards. Work on this paper was supported by NSF Awards NSF-1541002, NSF-1550707", " and NSF-1550707 and represents a contribution from the [EarthCube Program](https://www.earthcube.org"]}
+{"query": "\"NSF 1550707\" in:file", "text": ["/bulk-baconizing) [![NSF-1550707](https://img.shields.io/badge/NSF-1550707-blue.svg)](https://nsf.gov"]}
+{"query": "\"NSF 1550707\" in:file", "text": [" Paleoecology Database and Neotoma data stewards. Work on this paper was supported by NSF Awards NSF-1541002, NSF-1550707 and NSF-1550707.\n\n# REFERENCES\n"]}
+{"query": "\"NSF 1550707\" in:file", "text": [" paper was supported by NSF Awards NSF-1541002, NSF-1550707 and NSF-1550707.</p>\n<h2 id=\"references"]}
+{"query": "\"NSF 1550707\" in:file", "text": [" supported through NSF Grants NSF-1541002, NSF-1550855, NSF-1241868, and NSF-1550707.  This paper was"]}
+{"query": "\"NSF 1550707\" in:file", "text": [" Grants NSF-1541002, NSF-1550855, NSF-1241868, and NSF-1550707.  This paper was improved through"]}
+{"query": "\"NSF 1609061\" in:file", "text": ["\nNSF-1609061.\n\n**Connect:**\n\nMichael Green\n`@Github <https://github.com/1mikegrn>`_\n`@StackOverflow <https"]}
+{"query": "\"NSF 1609061\" in:file", "text": ["\nNSF-1609061.\n\n**Connect:**\n\nMichael Green\n`@Github <https://github.com/1mikegrn>`_\n`@StackOverflow <https"]}
+{"query": "\"NSF 1609061\" in:file", "text": ["\nNSF-1609061.\n\n**Connect:**\n\nMichael Green\n`@Github <https://github.com/1mikegrn>`_\n`@StackOverflow <https"]}
+{"query": "\"NSF 1609061\" in:file", "text": ["\nNSF-1609061.\n\n**Connect:**\n\nMichael Green\n`@Github <https://github.com/1mikegrn>`_\n`@StackOverflow <https"]}
+{"query": "\"NSF 1609061\" in:file", "text": [" sections.</p>\n<p>Research was supported by the National Science Foundation under grant\nNSF-1609061"]}
+{"query": "\"NSF 1609061\" in:file", "text": [" by the National Science Foundation under grant\nNSF-1609061.</p>\n<p><strong>Connect:</strong"]}
+{"query": "\"NSF 1609061\" in:file", "text": [" grant\nNSF-1609061.</p>\n<p><strong>Connect:</strong></p>\n<p>Michael Green\n<a class=\"reference external"]}
+{"query": "\"NSF 1609061\" in:file", "text": [" under grant\nNSF-1609061.</p>\n<p><strong>Connect:</strong></p>\n<p>Michael Green\n<a class=\"reference"]}
+{"query": "\"NSF 1704309\" in:file", "text": [" by DARPA. This\nwork is also supported by NSF CHASE-CI #1730158, NSF\n#1704309 and Cyber Florida"]}
+{"query": "\"NSF 1845664\" in:file", "text": [" discussions. This work was sup-\nported by NSF 1845664 and research awards from\nGoogle, Oracle, and"]}
+{"query": "\"NSF 1845664\" in:file", "text": [" review platforms.\n\nAcknowledgments\n\nAMR gratefully acknowledges the support of NSF\n1845664 and"]}
+{"query": "\"NSF 1845664\" in:file", "text": [". A.M.R gratefully acknowl-\nedges the support of NSF 1845664. Views and\nconclusions contained in this publication"]}
+{"query": "\"NSF 1931512\" in:file", "text": ["/RADICAL-Cybertools_Middleware_Building_Blocks_NSF_s_Cyberinfrastructure_Ecosystem_NSF_1931512_/11836179/1\" target=\"_blank\" rel=\"noopener\" class=\"talk-poster\" title=\"Download the poster\">Poster"]}
+{"query": "\"NSF 1637214\" in:file", "text": [">\n    </ProgramOfficer>\n    <AbstractNarration>NSF 1637214 RAPID: Using an Unmanned Aerial Vehicle and"]}
+{"query": "\"NSF 1550890\" in:file", "text": ["![DUB](https://img.shields.io/dub/l/vibe-d.svg)\n[![NSF-1550890](https://img.shields.io/badge", "/NSF-1550890-blue.svg)](https://nsf.gov/awardsearch/showAward?AWD_ID=1550890)\n\n# xlsx2Tilia\n\nThis python"]}
+{"query": "\"NSF 1550890\" in:file", "text": ["\r\n\r\nThis program was supported by NSF 1550890\r\n\r\nComments can be emailed to author: Andrew Anderson at"]}
+{"query": "\"NSF 1550890\" in:file", "text": ["\r\n\r\nThis program was supported by NSF 1550890\r\n\r\nComments can be emailed to author: Andrew Anderson at"]}
+{"query": "\"NSF 1915398\" in:file", "text": [").\n\n### Acknowledgement\n\nThis research was supported in part by NSF-1915398, NIH-R01EB029767, and NIH-R01EB029363"]}
+{"query": "\"NSF 1664022\" in:file", "text": ["=false\" target=\"_blank\">NSF #1664022</a></div>\n\t<div class=\"col-sm-3\">\n\t\tRitu Arora<br />\n\t\t<a href"]}
+{"query": "\"NSF 1901031\" in:file", "text": [" Science Foundation (NSF 1901031/1900903"]}
+{"query": "\"NSF 1901031\" in:file", "text": [" and Northern Arizona University funded by the National Science Foundation (NSF 1901031/1900903"]}
+{"query": "\"NSF 1703835\" in:file", "text": [" of Dependent\n   Types in Haskell.*  Weirich, Eisenberg (Bryn Mawr),  NSF 1703835, $814,453\n   (Penn"]}
+{"query": "\"NSF 1656118\" in:file", "text": [" Bruno Lemaitre and Luis Teixeira for fly stocks. This work was funded by NSF 1354421, NSF 1656118 and"]}
+{"query": "\"NSF 1921149\" in:file", "text": [")\n[![NSF-1921149](https://img.shields.io/badge/NSF-1921149-blue.svg)](https://nsf.gov/awardsearch", "/showAward?AWD_ID=1921149)\n[![NSF-1921149](https://img.shields.io/badge/NSF-1921465-blue.svg)](https://nsf"]}
+{"query": "\"NSF 1835904\" in:file", "text": [" visualization designs. This work was funded by NSF 1835904 and 1815587.\n"]}
+{"query": "\"NSF 1915913\" in:file", "text": ["\n[![NSF-0000000](https://img.shields.io/badge/NSF-1915913-blue.svg)](https://nsf.gov/awardsearch"]}
+{"query": "\"NSF 1632849\" in:file", "text": [">\n    </relatedIdentifiers>\n    <fundingReferences>\n        <fundingReference>\n            <funderName>NSF, 1632849"]}
+{"query": "\"NSF 1724845\" in:file", "text": ["></td>\n  <td></td>\n</tr>\n<tr>\n  <td>Haiying Shen</td>\n  <td>Other</td>\n  <td>NSF #1724845 CIF21 DIBBs", "/NSF_1724845_CIF21_DIBBs_PD_Building_High-Availability_Data_Capabilities_in_Data-Centric_Cyberinfrastructure/6198575\" target=\"_blank\"><i class=\"fa fa-external-link"]}
+{"query": "\"NSF 1724845\" in:file", "text": ["></td>\n  <td></td>\n</tr>\n<tr>\n  <td>Haiying Shen</td>\n  <td>Other</td>\n  <td>NSF #1724845 CIF21 DIBBs", "/NSF_1724845_CIF21_DIBBs_PD_Building_High-Availability_Data_Capabilities_in_Data-Centric_Cyberinfrastructure/6198575\" target=\"_blank\"><i class=\"fa fa-external-link"]}
+{"query": "\"NSF 1724845\" in:file", "text": [">\n<td></td></tr>\n<tr>\n<td>Haiying Shen</td>\n<td>University of Virginia</td>\n<td>NSF #1724845 CIF21", "/NSF_1724845_CIF21_DIBBs_PD_Building_High-Availability_Data_Capabilities_in_Data-Centric_Cyberinfrastructure/6198575\" target=\"_blank\"><i class=\"fa"]}
+{"query": "\"NSF 1724845\" in:file", "text": [">\n<tr>\n<td>Haiying Shen</td>\n<td>University of Virginia</td>\n<td>NSF #1724845 CIF21 DIBBs: PD", "/NSF_1724845_CIF21_DIBBs_PD_Building_High-Availability_Data_Capabilities_in_Data-Centric_Cyberinfrastructure/6198575\" target=\"_blank\" rel=\"noopener\"><i class=\"fa"]}
+{"query": "\"NSF 1739772\" in:file", "text": [".gov/awardsearch/showAward?AWD_ID=1739772}{NSF \\#1739772} \\\\ % \n\t2017 & GooFit 2.0 & ACAT 2017"]}
+{"query": "\"NSF 1739772\" in:file", "text": ["{https://nsf.gov/awardsearch/showAward?AWD_ID=1739772}{NSF \\#1739772} \\\\ % \n2017 & GooFit 2.0 & ACAT"]}
+{"query": "\"NSF 1564351\" in:file", "text": [" literature.\n\n\n## Principal Investigators\n\n* Joseph Hellerstein, UC Berkeley [NSF 1564351](https"]}
+{"query": "\"NSF 1748526\" in:file", "text": [" Insights from the Southwest (NSF 1748526). The proposed three-day Rural STEM HSI Conference will"]}
