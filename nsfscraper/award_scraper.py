@@ -1,11 +1,10 @@
-#!/usr/bin/env python3
-''' GitHub Python scraper
+"""GitHub Python scraper.
 
 Linking to github repositories to find all repositories that contain code
 related to the Re3Data databases.
 
 This code hits the abuse detection mechanism, even with the pausing.
-'''
+"""
 
 from github import Github
 from py2neo import Graph
@@ -104,14 +103,14 @@ for db in dbs:
                        'ghname': cf.get('name'),
                        'otid': db['ob']['AwardID']}
             repElem = emptyNone(repElem)
-            connect = """MATCH (obb:OBJECT)
-                         WHERE obb.AwardID = $otid
-                         OPTIONAL MATCH (oba:OBJECT)
-                         WHERE oba.id = $ghid
-                         WITH oba, obb
-                         OPTIONAL MATCH (oba)<-[:Target]-(a:ANNOTATION)-[:Target]->(obb)
-                         RETURN oba, a, obb
-                         """
+            connect = """
+                MATCH (obb:OBJECT)
+                WHERE obb.AwardID = $otid
+                OPTIONAL MATCH (oba:OBJECT)
+                WHERE oba.id = $ghid
+                WITH oba, obb
+                OPTIONAL MATCH (oba)<-[:Target]-(a:ANNOTATION)-[:Target]->(obb)
+                RETURN oba, a, obb"""
             test = graph.run(connect, repElem).data()
             if test[0]['obb'] is not None and test[0]['a'] is None:
                 i = i + 1
