@@ -7,10 +7,11 @@ This code hits the abuse detection mechanism, even with the pausing.
 """
 
 from py2neo import Graph
-from json import loads, load
+import json
 import random
 import requests
 import re
+
 
 def emptyNone(val):
     """Clean out None values.
@@ -43,7 +44,7 @@ if good is False:
            Please add it!")
 
 with open('./connect_remote.json') as f:
-    data = load(f)
+    data = json.load(f)
 
 graph = Graph(**data)
 
@@ -67,46 +68,40 @@ grants = graph.run(cypher).data()
 random.shuffle(grants)
 grants = list(map(lambda x: x['award'], grants))
 
+paperset = {'good': [], 'bad': []}
+
+thing = 0
+maxhits = 0
+# This will generate a large-ish number of papers and grants.
+
 for grantno in grants:
+    thing = thing + 1
+    if thing % 1000 == 0:
+        with open('data/papersout.json', 'w') as file:
+            json.dump(paperset, file)
     print("Running graphs for", grantno)
     papers = set()
-
-    gddurl = "https://geodeepdive.org/api/snippets?term=" + grantno + "&clean&full_results"
-
+    gddurl = "https://geodeepdive.org/api/snippets?term=" + \
+        grantno + "&clean&full_results"
     results = requests.get(gddurl)
     if results.status_code == 200:
         output = results.json()
-        total = output['success']['hits']
-        data = output['success']['data']
+        if output['success']['hits'] > 0:
+            if output['success']['hits'] > maxhits:
+                maxhits = output['success']['hits']
+            print('got ' + str(output['success']['hits']) + ' hits')
+            total = output['success']['hits']
+            data = output['success']['data']
+            for papers in data:
+                papers['AwardID'] = grantno
+                paperhits = map(lambda x: re.search(
+                    '(NSF)|(nsf)|([Ss]ci.*[Ff]oun)', x) is not None,
+                    {x for x in papers['highlight']})
+                if any(list(paperhits)):
+                    print('Good results')
+                    paperset['good'].append(papers)
+                else:
+                    paperset['bad'].append(papers)
 
-        for papers in data:
-            map(lambda x: re.search('(NSF)|(Nat.*Sci.*Foun)' is None, x),
-                papers['highlights'])
-
-
-    if len(content_files) > 0:
-        i = 0
-        total = len(content_files)
-        for cf in content_files:
-            cf = loads(cf)
-            repElem = {'awardid': grantno,
-                       'doi': cf.get('url'),
-                       'ghdescription': cf.get('description'),
-                       'ghname': cf.get('name'),
-                       'otid': db['ob']['id']}
-            repElem = emptyNone(repElem)
-            connect = """MATCH (oba:OBJECT)
-                         WHERE oba.id = $ghid
-                         MATCH (obb:OBJECT)
-                         WHERE obb.id = $otid
-                         WITH oba, obb
-                         MATCH (oba)<-[:Target]-(a:ANNOTATION)-[:Target]->(obb)
-                         RETURN a
-                         """
-            test = graph.run(connect, repElem)
-            if len(test.data()) == 0:
-                i = i + 1
-                print("    * Adding repository " + repElem['ghname']
-                      + " to the graph.")
-                with open('cql/github_linker.cql', mode="r") as gitadd:
-                    silent = graph.run(gitadd.read(), repElem)
+with open('data/papersout.json', 'w') as file:
+    json.dump(paperset, file)
