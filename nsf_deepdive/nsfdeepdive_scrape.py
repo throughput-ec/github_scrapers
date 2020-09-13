@@ -11,6 +11,7 @@ import json
 import random
 import requests
 import re
+import os
 
 
 def emptyNone(val):
@@ -43,16 +44,31 @@ if good is False:
     print("The connect_remote.json file is not in your .gitignore file. \
            Please add it!")
 
-with open('./connect_remote.json') as f:
-    data = json.load(f)
+if os.path.exists('./connect_remote.json'):
+    with open('./connect_remote.json') as f:
+        data = json.load(f)
+else:
+    raise Exception("No connection file exists.")
+
+if os.path.exists('data/papersout.json'):
+    with open('data/papersout.json', 'r') as file:
+        paperset = json.load(file)
+else:
+    paperset = {'good': [], 'bad': []}
+
+awards = list(map(lambda x: x['AwardID'], paperset['good']))
+awards.extend(list(map(lambda x: x['AwardID'], paperset['bad'])))
 
 graph = Graph(**data)
 
 tx = graph.begin()
 
-# The use of the >>>!!!<<< is used to show deprecation apparently.
-# This returns 2255 research databases from re3data.
-#  Here we're matching repos that have not been matched yet.
+cypher = """
+    MATCH (:TYPE {type:"schema:Grant"})<-[:isType]-(gt:OBJECT)
+    RETURN COUNT(DISTINCT gt) AS tot"""
+
+grant_tot = graph.run(cypher).data()
+
 cypher = """
     MATCH (:TYPE {type:"schema:Grant"})<-[:isType]-(gt:OBJECT)
     MATCH (oa:OBJECT)-[:isType]->(:TYPE {type:"schema:Article"})
@@ -66,9 +82,13 @@ print("Matching existing repositories")
 grants = graph.run(cypher).data()
 
 random.shuffle(grants)
-grants = list(map(lambda x: x['award'], grants))
+grantUnlinked = list(map(lambda x: x['award'], grants))
 
-paperset = {'good': [], 'bad': []}
+grants = set(grantUnlinked) - set(awards)
+grants = list(grants)
+
+print("Matching " + str(len(grants)) + " of " +
+      str(grant_tot[0]['tot']) + " research awards.")
 
 thing = 0
 maxhits = 0
@@ -105,3 +125,6 @@ for grantno in grants:
 
 with open('data/papersout.json', 'w') as file:
     json.dump(paperset, file)
+
+with open('data/papersgood.json', 'w') as file:
+    json.dump(paperset['good'], file)
