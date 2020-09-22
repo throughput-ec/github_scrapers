@@ -65,17 +65,23 @@ else:
 
 thing = 0
 maxhits = 0
-# This will generate a large-ish number of papers and grants.
 
-gddurl = "https://geodeepdive.org/api/snippets?term=gitlab.com,bitbucket.com,github.com&clean&full_results"
+# This will generate a large-ish number of papers and grants.
+gddurl = ("https://geodeepdive.org/api/snippets?"
+          + "term=gitlab.com,bitbucket.com,github.com&clean&full_results")
+
 hits = True
 paperCt = 0
 
 while hits:
     with open('data/papersout.json', 'w') as file:
         json.dump(paperset, file)
-    print('Have run ' + str(paperCt) + ' papers, looking for ' + str(maxhits))
-    results = requests.get(gddurl)
+    print('Have run ' + str(paperCt)
+          + ' papers, looking for ' + str(maxhits))
+    try:
+        results = requests.get(gddurl)
+    except requests.exceptions.MissingSchema:
+        break
     if results.status_code == 200:
         output = results.json()
         gddurl = output['success']['next_page']
@@ -111,9 +117,7 @@ for rec in good_list:
 with open('data/papersout.json', 'w') as file:
     json.dump(paperset, file)
 
-with open('data/papersgood.json', 'r') as file:
-    good_list = json.load(file)
-
+with open('data/papersgood.json', 'w') as file:
     json.dump(good_list, file)
 
 
@@ -129,15 +133,17 @@ graph = Graph(**data)
 tx = graph.begin()
 
 # Link the papers to the github repositories:
-k = 0
+rep_run = 0
 for i in good_list:
-    k = k + 1
+    rep_run = rep_run + 1
     if i['url'] is not None:
         i['url'] = re.sub(r'^g', 'https://g', i['url'])
         i['url'] = re.sub(r'^http:', 'https:', i['url'])
         i['url'] = re.sub(r'^https://https://github',
                           'https://github', i['url'])
+        k = 0
         for j in i['papers']:
+            k = k + 1
             dumper = {'ghurl': i['url'],
                       'doi': j['doi'],
                       'journal': j['pubname'],
@@ -146,7 +152,8 @@ for i in good_list:
                       'pprurl': j['URL'],
                       'title': j['title'],
                       'highlight': j['highlight']}
-            print(str(k) + ": Running for " + i['url'] + " . . . ", end = '')
+            print(str(rep_run) + ', ' + str(k) + ": Running for " + i['url']
+                  + " . . . ", end='')
             with open("cql/checklinker.cql") as checker:
                 checker = graph.run(checker.read(), dumper).data()
             if checker[0]['res'] == 0:
