@@ -1,11 +1,10 @@
-#!/usr/bin/env python3
-''' GitHub Python scraper
+"""GitHub Python scraper.
 
 Linking to github repositories to find all repositories that contain code
 related to the Re3Data databases.
 
 This code hits the abuse detection mechanism, even with the pausing.
-'''
+"""
 
 from github import Github
 from py2neo import Graph
@@ -16,6 +15,11 @@ from gitScraper.tryCatchQuery import tryCatchQuery
 
 
 def emptyNone(val):
+    """Clean out None values.
+
+    val A Python object that may or may not have None values.
+    returns a Python object with all None values replaced by ''.
+    """
     for k in val.keys():
         if type(val[k]) is dict:
             emptyNone(val[k])
@@ -55,9 +59,12 @@ tx = graph.begin()
 # The use of the >>>!!!<<< is used to show deprecation apparently.
 # This returns 2255 research databases from re3data.
 #  Here we're matching repos that have not been matched yet.
-cypher = """MATCH (:TYPE {type:"schema:CodeRepository"})-[:isType]-(cr:OBJECT)-[:Target]-(:ANNOTATION)-[tar:Target]-(ot:OBJECT)-[:isType]-(:TYPE {type:"schema:DataCatalog"})
+cypher = """
+    MATCH (:TYPE {type:"schema:CodeRepository"})<-[:isType]-(cr:OBJECT)
+    MATCH (ot:OBJECT)-[:isType]->(:TYPE {type:"schema:DataCatalog"})
+    MATCH (cr)-[:Target]-(:ANNOTATION)-[tar:Target]-(ot)
     WITH COLLECT(DISTINCT ot.name) AS goodies
-    MATCH (ob:OBJECT)-[:isType]-(:TYPE {type:"schema:DataCatalog"})
+    MATCH (ob:OBJECT)-[:isType]->(:TYPE {type:"schema:DataCatalog"})
     WHERE (NOT ob.name IN goodies)
     RETURN DISTINCT ob"""
 
@@ -97,6 +104,7 @@ for db in dbs:
             test = graph.run(connect, repElem)
             if len(test.data()) == 0:
                 i = i + 1
-                print("    * Adding repository " + repElem['ghname'] + " to the graph.")
+                print("    * Adding repository " + repElem['ghname']
+                      + " to the graph.")
                 with open('cql/github_linker.cql', mode="r") as gitadd:
                     silent = graph.run(gitadd.read(), repElem)
