@@ -4,7 +4,23 @@
 
 There are 73,000 cataloged code repositories within Throughput. These are associated with various databases, based on scraping that was done in other Throughput repositories. The challenge, is that when a user searches for repositories that are associated with a database they may find a large number of resources that aren't helpful in a "cookbook" sense.
 
-To help us we can look at some code repositories and see if we can categorize them.
+To help us we can look at some code repositories and see if we can categorize them. We use the following call directly against the database:
+
+```cypher
+MATCH (tyc:TYPE {type: 'schema:CodeRepository'})
+MATCH (tyb:TYPE {type: 'schema:DataCatalog'})
+MATCH (r:OBJECT)-[:isType]-(tyc)
+  WHERE exists(r.name)
+WITH r, tyb
+MATCH (d:OBJECT)-[:isType]-(tyb)
+MATCH (d)<-[:Target]-(:ANNOTATION)-[:Target]->(r)
+  WITH DISTINCT r, COLLECT(d) AS dbs, rand() AS number
+RETURN dbs[0].name, r.name, r.url
+ORDER BY number
+LIMIT 100
+```
+
+This returns the set of repositories with `name` properties that are connected directly to a database, because some repositories can be connected to many databases, be only choose one database per repository and we add a random integer to the result set (`rand() as number`) to ensure that we get a distinct subset (`n = 100`) of all the results.
 
 Broadly, we're looking at a few categories:
 
@@ -26,6 +42,10 @@ There is data that is stored in this repository.
 ### Informational
 
 This is primarily things like websites.
+
+## Repositories and Their Classifications
+
+Things can have multiple categories.
 
 DB                                                            | Repo                                                                                                            | Repo Class | Notes
 ------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | ---------- | -----
