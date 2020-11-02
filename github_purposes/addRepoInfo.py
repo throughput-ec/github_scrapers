@@ -93,11 +93,13 @@ def checkReadme(obj):
         headings = len(re.findall(r'##+\s', textcontent))
         readme = {'readme': True,
                   'badges': badges,
-                  'headings': headings}
+                  'headings': headings,
+                  'char': len(textcontent)}
     except Exception:
         readme = {'readme': False,
                   'badges': None,
-                  'headings': None}
+                  'headings': None,
+                  'char': None}
     try:
         license = obj.get_license().license.name
     except Exception:
@@ -195,7 +197,7 @@ tx = graph.begin()
 
 cypher = """
     MATCH (cr:codeRepo)
-    WHERE NOT EXISTS(cr.meta)
+    WHERE EXISTS(cr.status)
     RETURN DISTINCT cr.url AS url
     SKIP $offset
     LIMIT 20
@@ -203,7 +205,8 @@ cypher = """
 
 add_meta = """
     MATCH (cr:codeRepo)
-    WHERE cr.id = $id
+    WHERE cr.url = $url OR cr.id = $id
+    SET cr.id = $id
     SET cr.meta = toString($meta)
     SET cr.url = $url
     SET cr.name = $name
@@ -258,11 +261,14 @@ for j in offsets:
                               - datetime.now()).total_seconds() - 28800
                 print('We need to wait ' + "{:.2f}".format(resetPoint)
                       + ' seconds until rate reset.')
-                for i in range(resetPoint, 0, -30):
+                for ctd in range(int(resetPoint), 0, -30):
                     time.sleep(30)
-                    resetPoint = (left.core.reset
-                                  - datetime.now()).total_seconds() - 28800
-                    print("{:.2f}".format(resetPoint) + ' seconds until rate reset.')
+                    resettime = (left.core.reset
+                                 - datetime.now()).total_seconds() - 28800
+                    print("{:.1f}".format(resettime)
+                          + ' seconds until rate reset.')
+                    if int(resettime) < 0:
+                        break
             except Exception as e:
                 print(e)
                 # If we don't get the right repository, we can check to see
@@ -272,7 +278,7 @@ for j in offsets:
                     user = g.get_user(ownerName)
                     repoSet = user.get_repos()
                     repoNames = list(map(lambda x: x.name, repoSet))
-                    indices = [i for i,
+                    indices = [k for k,
                                s in enumerate(repoNames) if repoName in s]
                     if len(indices) > 0:
                         repo = g.get_repo(ownerName + '/' + indices[0])
@@ -294,6 +300,7 @@ for j in offsets:
                              'url': repoInfo['url']}
                 aa = graph.run(add_meta, uploadObj)
                 print(i['url'])
-            except Exception:
+            except Exception as e:
+                print(e)
                 skipped.append(i['url'])
                 print('Couldn\'t upload for ' + i['url'])
