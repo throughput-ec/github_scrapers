@@ -200,7 +200,7 @@ cypher = """
     WHERE NOT EXISTS(cr.meta)
     WITH cr, rand() AS random
     ORDER BY random DESC
-    RETURN cr
+    RETURN cr.url AS url
     SKIP $offset
     LIMIT 20
     """
