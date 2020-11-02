@@ -197,8 +197,10 @@ tx = graph.begin()
 
 cypher = """
     MATCH (cr:codeRepo)
-    WHERE EXISTS(cr.status)
+    WHERE NOT EXISTS(cr.meta)
+    WITH cr, rand() AS random
     RETURN DISTINCT cr.url AS url
+    ORDER BY random DESC
     SKIP $offset
     LIMIT 20
     """
