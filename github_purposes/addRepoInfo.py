@@ -68,29 +68,89 @@ This code hits the abuse detection mechanism, even with the pausing.
 
 from py2neo import Graph
 import json
-import random
 import requests
 import re
 import os
-from github import Github
+from github import Github, RateLimitExceededException
+from datetime import datetime
+import time
+
+
+def authorNames(author):
+    author = author.author
+    if author is not None:
+        return author.login
+    else:
+        return None
+
+
+def checkReadme(obj):
+    try:
+        readme = obj.get_readme()
+        textcontent = str(readme.decoded_content)
+        # The following regex matches badges:
+        badges = len(re.findall(r'\[!\[.+?]\(.+?\)\]\(http.+?\)', textcontent))
+        headings = len(re.findall(r'##+\s', textcontent))
+        readme = {'readme': True,
+                  'badges': badges,
+                  'headings': headings}
+    except Exception:
+        readme = {'readme': False,
+                  'badges': None,
+                  'headings': None}
+    try:
+        license = obj.get_license().license.name
+    except Exception:
+        license = None
+    return {'readme': readme, 'license': license}
+
+
+def toString(dt):
+    """Convert datetime object to string."""
+    return dt.strftime("%Y-%m-%d (%H:%M:%S.%f)")
 
 
 def checkRepo(obj):
     """Return repository information.
+
     obj A pyGithub ContentFile object.
     """
-    textcontent = str(obj.get_readme().decoded_content)
-    # The following regex matches badges:
-    badges = len(re.findall(r'\[!\[.+?]\(.+?\)\]\(http.+?\)', textcontent))
-    created = obj.created_at
+    created = toString(obj.created_at)
+    # Check commit information:
+    commits = obj.get_commits()
+    commitCount = commits.totalCount
+    description = obj.description
+    lastCommit = toString(commits[0].commit.author.date)
+    firstCommit = toString(commits[-1].commit.author.date)
+    authors = set(map(lambda x: authorNames(x), commits))
+    issues = obj.get_issues().totalCount
+    branches = obj.get_branches().totalCount
     forks = obj.forks_count
     watchers = obj.watchers_count
+    stars = obj.stargazers_count
     isFork = obj.fork
-    return {'created': created,
-            'badges': badges,
+    languages = requests.get(obj.languages_url).json()
+    return {'id': obj.id,
+            'repo': obj.name,
+            'owner': obj.owner.login,
+            'name': obj.owner.login + '/' + obj.name,
+            'url': obj.html_url,
+            'created': created,
+            'description': description,
+            'topics': obj.get_topics(),
+            'readme': checkReadme(obj),
+            'commits': {'totalCommits': commitCount,
+                        'range': [firstCommit, lastCommit],
+                        'authors': list(authors)},
+            'languages': languages,
+            'stars': stars,
             'forks': forks,
             'fork': isFork,
-            'watchers': watchers}
+            'issues': issues,
+            'branches': branches,
+            'watchers': watchers,
+            'checkdate': toString(datetime.now())
+            }
 
 
 def emptyNone(val):
@@ -129,17 +189,101 @@ if os.path.exists('./connect_remote.json'):
 else:
     raise Exception("No connection file exists.")
 
+graph = Graph(**data)
+
+tx = graph.begin()
+
+cypher = """
+    MATCH (cr:codeRepo)
+    WHERE NOT EXISTS(cr.meta)
+    RETURN DISTINCT cr.url AS url
+    SKIP $offset
+    LIMIT 20
+    """
+
+add_meta = """
+    MATCH (cr:codeRepo)
+    WHERE cr.id = $id
+    SET cr.meta = toString($meta)
+    SET cr.url = $url
+    SET cr.name = $name
+    SET cr.status = NULL
+    RETURN 'okay'
+    """
+
+add_dead = """
+    MATCH (cr:codeRepo)
+    WHERE cr.url = $url
+    SET cr.status = 404
+    RETURN 'okay'
+    """
+
+cypher_count = """
+    MATCH (cr:codeRepo)
+    WHERE NOT (EXISTS(cr.meta) OR EXISTS(cr.status))
+    RETURN COUNT(DISTINCT cr) AS total
+    """
+
+print("Matching existing repositories")
+total_repos = graph.run(cypher_count).data()[0]['total']
+
+offsets = range(0, total_repos, 20)
+
 with open('./gh.token') as f:
     gh_token = f.read().splitlines()
 
 g = Github(gh_token[2])
 
-repolist = ['SimonGoring/neotoma', 'ropensci/neotoma', 'annaegeorge/AnnaEGeorge.github.io', 'WilliamsPaleoLab/Geography523']
+repoupdates = []
+skipped = []
+val = 0
 
-repoupdates = {}
-
-for i in repolist:
-    repo = g.get_repo(i)
-    forks = repo.forks_count
-    watchers = repo.watchers_count
-    readme = repo.get_readme()
+for j in offsets:
+    repolist = graph.run(cypher, {'offset': j}).data()
+    print(str(val) + ' of ' + str(total_repos))
+    for i in repolist:
+        val = val + 1
+        url = i['url'].split('/')
+        repoIdx = url.index('github.com')
+        if len(url) > repoIdx + 2:
+            ownerName = url[repoIdx + 1]
+            repoName = url[repoIdx + 2]
+        # testRepoName = i['cr']['name']
+            try:
+                repo = g.get_repo(ownerName + '/' + repoName)
+            except RateLimitExceededException:
+                print('Waiting.')
+                time.sleep(300)
+                continue
+            except Exception:
+                # If we don't get the right repository, we can check to see
+                # if there's a near match for the repository name.  That's
+                # because the regex for DeepDive was a bit rough.
+                try:
+                    user = g.get_user(ownerName)
+                    repoSet = user.get_repos()
+                    repoNames = list(map(lambda x: x.name, repoSet))
+                    indices = [i for i, s in enumerate(repoNames) if repoName in s]
+                    if len(indices) > 0:
+                        repo = g.get_repo(ownerName + '/' + indices[0])
+                    else:
+                        # We got a 404 and couldn't find anything matching.
+                        bb = graph.run(add_dead, {'url': i['url']})
+                        print('Hit a 404 for ' + i['url'])
+                        continue
+                except Exception:
+                    bb = graph.run(add_dead, {'url': i['url']})
+                    print('Hit a 404 for ' + i['url'])
+                    continue
+            try:
+                repoInfo = checkRepo(repo)
+                repoupdates.append(repoInfo)
+                uploadObj = {'meta': json.dumps(repoInfo),
+                             'id': repoInfo['id'],
+                             'name': repoInfo['name'],
+                             'url': repoInfo['url']}
+                aa = graph.run(add_meta, uploadObj)
+                print(i['url'])
+            except Exception:
+                skipped.append(i['url'])
+                print('Couldn\'t upload for ' + i['url'])
