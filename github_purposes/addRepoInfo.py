@@ -251,11 +251,20 @@ for j in offsets:
         # testRepoName = i['cr']['name']
             try:
                 repo = g.get_repo(ownerName + '/' + repoName)
-            except RateLimitExceededException:
-                print('Waiting.')
-                time.sleep(300)
-                continue
-            except Exception:
+            except RateLimitExceededException as e:
+                print(e)
+                left = g.get_rate_limit()
+                resetPoint = (left.core.reset
+                              - datetime.now()).total_seconds() - 28800
+                print('We need to wait ' + "{:.2f}".format(resetPoint)
+                      + ' seconds until rate reset.')
+                for i in range(resetPoint, 0, -30):
+                    time.sleep(30)
+                    resetPoint = (left.core.reset
+                                  - datetime.now()).total_seconds() - 28800
+                    print("{:.2f}".format(resetPoint) + ' seconds until rate reset.')
+            except Exception as e:
+                print(e)
                 # If we don't get the right repository, we can check to see
                 # if there's a near match for the repository name.  That's
                 # because the regex for DeepDive was a bit rough.
@@ -263,7 +272,8 @@ for j in offsets:
                     user = g.get_user(ownerName)
                     repoSet = user.get_repos()
                     repoNames = list(map(lambda x: x.name, repoSet))
-                    indices = [i for i, s in enumerate(repoNames) if repoName in s]
+                    indices = [i for i,
+                               s in enumerate(repoNames) if repoName in s]
                     if len(indices) > 0:
                         repo = g.get_repo(ownerName + '/' + indices[0])
                     else:
