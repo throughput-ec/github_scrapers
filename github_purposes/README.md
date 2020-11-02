@@ -28,12 +28,20 @@ Broadly, we're looking at a few categories:
 
 Elements of the repository serve to house educational resources. This may include:
 
+- Class assignment 
 - Class notes
 - Documentation of use
+- Resources
+- Tutorial
 
 ### Analysis
 
 Elements of this repository serve as the primary analysis for a workflow.
+
+- Comparative data use/reuse
+- Integrative data use/reuse 
+- Database API use
+
 
 ### Archiving
 
@@ -43,42 +51,44 @@ There is data that is stored in this repository.
 
 This is primarily things like websites.
 
+- Scraping database registries 
+
 ## Repositories and Their Classifications
 
 Things can have multiple categories.
 
 DB                                                            | Repo                                                                                                            | Repo Class | Notes
 ------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | ---------- | -----
-DSpace@MIT                                                    | [ziyaxu/JAZWUX](https://github.com/ziyaxu/JAZWUX)                                                               |            |
-DRYAD                                                         | [hsf-training/analysis-essentials](https://github.com/hsf-training/analysis-essentials)                         |            |
-European Social Survey                                        | [artemkramov/python-filter](https://github.com/artemkramov/python-filter)                                       |            |
-European Election Database                                    | [CINERGI/scraper](https://github.com/CINERGI/scraper)                                                           |            |
-UNdata                                                        | [chinapedia/wikipedia.zh](https://github.com/chinapedia/wikipedia.zh)                                           |            |
-EUDAT                                                         | [zenodo/zenodo-docs-user](https://github.com/zenodo/zenodo-docs-user)                                           |            |
-NDSF Data Portal                                              | [CINERGI/scraper](https://github.com/CINERGI/scraper)                                                           |            |
-dictybase                                                     | [adristoteles/workinCopyMay](https://github.com/adristoteles/workinCopyMay)                                     |            |
-NCBI Taxonomy                                                 | [Ensembl/public-plugins](https://github.com/Ensembl/public-plugins)                                             |            |
+DSpace@MIT                                                    | [ziyaxu/JAZWUX](https://github.com/ziyaxu/JAZWUX)                                                               |       Education - Documentation of use   | One article in DB (3x) for mathmatical methods they use for an XY printer to draw raster images they created while attending LEAP@CMU. . 
+DRYAD                                                         | [hsf-training/analysis-essentials](https://github.com/hsf-training/analysis-essentials)                         |    Education - Resources; Informational        |Links to Dryad homepage as an example of open science. 
+European Social Survey                                        | [artemkramov/python-filter](https://github.com/artemkramov/python-filter)                                       |    **Informational and/or Archiving?**     |Data for the project consists of articles and their metadata including links to EES data and the EES database. Some documentation in Ukrainian.  
+European Election Database                                    | [CINERGI/scraper](https://github.com/CINERGI/scraper)                                                           |   Informational - Scraping database registries        |Scraped Databib which included European Election Database. 
+UNdata                                                        | [chinapedia/wikipedia.zh](https://github.com/chinapedia/wikipedia.zh)                                           |    Unable to categorize.     |Documentation and code in Mandarin. 
+EUDAT                                                         | [zenodo/zenodo-docs-user](https://github.com/zenodo/zenodo-docs-user)                                           |  Informational          |Link to EUDAT as a partner of Zenodo. 
+NDSF Data Portal                                              | [CINERGI/scraper](https://github.com/CINERGI/scraper)                                                           |    Informational - Scraping database registries         |Scraped Databib which included NDSF Data Portal.
+dictybase                                                     | [adristoteles/workinCopyMay](https://github.com/adristoteles/workinCopyMay)                                     |      Unable to categorize.     |Lack of documentation. 
+NCBI Taxonomy                                                 | [Ensembl/public-plugins](https://github.com/Ensembl/public-plugins)                                             |            | Plugins for Ensembl Genome Browser. 
 Global Land Cover Facility                                    | [ocftw/OpenFoundry-Archive](https://github.com/ocftw/OpenFoundry-Archive)                                       |            |
-DEIMS-SDR                                                     | [ajpelu/nota_dataRepositories](https://github.com/ajpelu/nota_dataRepositories)                                 |            |
-Center for Operational Oceanographic Products and Services    | [just6979/tide-catcher](https://github.com/just6979/tide-catcher)                                               |            |
-DataONE                                                       | [au-research/ARDC-23-things](https://github.com/au-research/ARDC-23-things)                                     |            |
-OpenML                                                        | [Alex-Samarkin/untitled13](https://github.com/Alex-Samarkin/untitled13)                                         |            |
-Synapse                                                       | [smc-rna-challenge/jeltje-9605360](https://github.com/smc-rna-challenge/jeltje-9605360)                         |            |
-GEON                                                          | [GoldRenard/AllegroROM_4.4.2_mt6589](https://github.com/GoldRenard/AllegroROM_4.4.2_mt6589)                     |            |
-BioPortal                                                     | [yannrivault/queryMed](https://github.com/yannrivault/queryMed)                                                 |            |
-BeeBase                                                       | [CINERGI/TextTeaserOnline](https://github.com/CINERGI/TextTeaserOnline)                                         |            |
-Data.gov.au                                                   | [stainsby/dga-sync](https://github.com/stainsby/dga-sync)                                                       |            |
-SILVA                                                         | [JavierRamiroGarcia/NG-Tax](https://github.com/JavierRamiroGarcia/NG-Tax)                                       |            |
-Association of Religion Data Archives                         | [NikulinVs/inv_index_lab](https://github.com/NikulinVs/inv_index_lab)                                           |            |
-GiardiaDB                                                     | [bio-tools/content](https://github.com/bio-tools/content)                                                       |            |
-Internet Archive                                              | [sato-takuya/sample_app](https://github.com/sato-takuya/sample_app)                                             |            |
-The Human Protein Atlas                                       | [jay-feng/CORD-project](https://github.com/jay-feng/CORD-project)                                               |            |
-MaizeGDB                                                      | [misscindz/Bioinformatics-Codes](https://github.com/misscindz/Bioinformatics-Codes)                             |            |
-UK Data Service                                               | [digipres/digipres.github.io](https://github.com/digipres/digipres.github.io)                                   |            |
-KONECT                                                        | [YupingLu/biclique](https://github.com/YupingLu/biclique)                                                       |            |
-National Archives                                             | [usnationalarchives/digital-preservation](https://github.com/usnationalarchives/digital-preservation)           |            |
-Worldpop                                                      | [elifesciences/elife-articles](https://github.com/elifesciences/elife-articles)                                 |            |
-FANTOM                                                        | [Hypercubed/fantom-cat](https://github.com/Hypercubed/fantom-cat)                                               |            |
+DEIMS-SDR                                                     | [ajpelu/nota_dataRepositories](https://github.com/ajpelu/nota_dataRepositories)                                 |Informational          |  Article reviewing and citing different data repository options in Spanish. 
+Center for Operational Oceanographic Products and Services    | [just6979/tide-catcher](https://github.com/just6979/tide-catcher)                                               |      **Needs new category**      |Use Center for Operational Oceanographic Products and Services tide data for an application. 
+DataONE                                                       | [au-research/ARDC-23-things](https://github.com/au-research/ARDC-23-things)                                     |        Education - Resources; Informational   |Links to DataONE data management plan resources. 
+OpenML                                                        | [Alex-Samarkin/untitled13](https://github.com/Alex-Samarkin/untitled13)                                         |   Unable to categorize.         |Some documentation in Ukrnanian. 
+Synapse                                                       | [smc-rna-challenge/jeltje-9605360](https://github.com/smc-rna-challenge/jeltje-9605360)                         |        Analysis - Integrative data use; Educational - Tutorial     |This is a CWL workflow which was submitted to the SMC-RNA Challenge in the isoform quantification category. Example and reference data files are stored on Synapse and are defined in synapse_inputs.json.
+GEON                                                          | [GoldRenard/AllegroROM_4.4.2_mt6589](https://github.com/GoldRenard/AllegroROM_4.4.2_mt6589)                     |     Unable to categorize.       | This may be a false positive of GEON. 
+BioPortal                                                     | [yannrivault/queryMed](https://github.com/yannrivault/queryMed)                                                 |     **Database API use**       |Use API from BioPortal and SIFR in their package to create pharmacological and medical annotations
+BeeBase                                                       | [CINERGI/TextTeaserOnline](https://github.com/CINERGI/TextTeaserOnline)                                         |    Informational - Scraping database registries        |Scraped hydro10 which included BeeBase.
+Data.gov.au                                                   | [stainsby/dga-sync](https://github.com/stainsby/dga-sync)                                                       |       Education - Tutorial & **Needs new category**     |**Tool syncs datsets from data.gov.au using JSON metadata stored on data.gov.au for each each dataset** and repo has tutorial of tool using data.gov.au data. 
+SILVA                                                         | [JavierRamiroGarcia/NG-Tax](https://github.com/JavierRamiroGarcia/NG-Tax)                                       |  **Unsure - Needs new catoregy**       |Download Silva database and taxonomy during installation of pipeline and used within pipeline to generate the customized databases adapted to NG-Tax by in-silico PCR.
+Association of Religion Data Archives                         | [NikulinVs/inv_index_lab](https://github.com/NikulinVs/inv_index_lab)                                           |      Analysis; Archiving      |Cites to the dataset of each/country state involved in analysis. Adds actual data in textual form in .txt file. 
+GiardiaDB                                                     | [bio-tools/content](https://github.com/bio-tools/content)                                                       |      Informational      |Central place for the exchange of tool metadata for multiple projects, including GiardiaDB.
+Internet Archive                                              | [sato-takuya/sample_app](https://github.com/sato-takuya/sample_app)                                             |       Unable to categorize.    |Documentation in Japanese. 
+The Human Protein Atlas                                       | [jay-feng/CORD-project](https://github.com/jay-feng/CORD-project)                                               |  **Informational and/or archiving**          |Data for the project consist of articles/metadata. This includes links to Human Protein Atlas data and database.
+MaizeGDB                                                      | [misscindz/Bioinformatics-Codes](https://github.com/misscindz/Bioinformatics-Codes)                             |   Education - Class assignment; Informational          | Class assignments dataset with abbreviations for cross-referenced databases including abbreviation, database, genric-url, url_syntax, url-example, etc. 
+UK Data Service                                               | [digipres/digipres.github.io](https://github.com/digipres/digipres.github.io)                                   |      Informational      |Linking to UK Data Service for tips on managing data.
+KONECT                                                        | [YupingLu/biclique](https://github.com/YupingLu/biclique)                                                       |     Education - Tutorial       |Test datasets downloaded from Konect.Maximal Biclique Enumeration in Bipartite Graphs. A tool for enumerating maximal complete bipartite graphs. **KONECT is no longer hosted by the Institute of Web Science and Technologies.**  
+National Archives                                             | [usnationalarchives/digital-preservation](https://github.com/usnationalarchives/digital-preservation)           | Informational           |The National Archives and Records Administration is releasing its Digital Preservation Framework, which consists of a Risk and Prioritization Matrix and File Format Preservation Action Plans.
+Worldpop                                                      | [elifesciences/elife-articles](https://github.com/elifesciences/elife-articles)                                 |  Informational          |Github repository is xml of elife articles. Some of the xml files of elife articles contained links to Worldpop homepage.   
+FANTOM                                                        | [Hypercubed/fantom-cat](https://github.com/Hypercubed/fantom-cat)                                               |   Analysis - Integrative data reuse        |Using FANTOM5 Cap Analysis of Gene Expression (CAGE) data the team integrated multiple transcript collections to generate a comprehensive catalog of 23,887 high-confidence 5’ complete human lncRNA genes and their expression profiles across 1,829 samples from the major human primary cell types and tissues.
 NSF Arctic Data Center                                        | [climate-mirror/datasets](https://github.com/climate-mirror/datasets)                                           |            |
 Human Metabolome Database                                     | [chinapedia/wikipedia.zh.mediawiki](https://github.com/chinapedia/wikipedia.zh.mediawiki)                       |            |
 London Datastore                                              | [TAnarchy/EngineGroupApplication](https://github.com/TAnarchy/EngineGroupApplication)                           |            |
