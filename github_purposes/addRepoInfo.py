@@ -199,8 +199,8 @@ cypher = """
     MATCH (cr:codeRepo)
     WHERE NOT EXISTS(cr.meta)
     WITH cr, rand() AS random
-    RETURN DISTINCT cr.url AS url
     ORDER BY random DESC
+    RETURN cr
     SKIP $offset
     LIMIT 20
     """
