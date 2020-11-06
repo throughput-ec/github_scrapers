@@ -260,13 +260,13 @@ for j in offsets:
                 print(e)
                 left = g.get_rate_limit()
                 resetPoint = (left.core.reset
-                              - datetime.now()).total_seconds() - 28800
+                              - datetime.now()).total_seconds() - 21600
                 print('We need to wait ' + "{:.2f}".format(resetPoint)
                       + ' seconds until rate reset.')
                 for ctd in range(int(resetPoint), 0, -30):
                     time.sleep(30)
                     resettime = (left.core.reset
-                                 - datetime.now()).total_seconds() - 28800
+                                 - datetime.now()).total_seconds() - 21600
                     print("{:.1f}".format(resettime)
                           + ' seconds until rate reset.')
                     if int(resettime) < 0:
