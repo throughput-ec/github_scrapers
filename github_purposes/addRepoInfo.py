@@ -198,12 +198,17 @@ graph = Graph(**data)
 tx = graph.begin()
 
 cypher = """
-    MATCH (cr:codeRepo)
+    MATCH (kw:KEYWORD)
+    WHERE kw.keyword CONTAINS('earth') OR kw.keyword CONTAINS('paleo')
+    WITH kw
+    MATCH (db:dataCat)<-[:Body]-(:ANNOTATION)-[:hasKeyword]->(kw)
+    WITH db
+    MATCH (cr:codeRepo)<-[:Target]-(:ANNOTATION)-[:Target]->(db)
     WHERE NOT EXISTS(cr.meta)
-    WITH cr, rand() AS random
-    ORDER BY random DESC
-    RETURN cr.url AS url
-    SKIP $offset
+    WITH DISTINCT cr.url AS url, db.name AS name, rand() AS random
+    ORDER BY random
+    RETURN url
+    SKIP toInteger($offset)
     LIMIT 20
     """
 
@@ -240,8 +245,6 @@ with open('./gh.token') as f:
     gh_token = f.read().splitlines()
 
 g = Github(gh_token[2])
-
-tzdiff =
 
 repoupdates = []
 skipped = []
