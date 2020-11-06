@@ -77,6 +77,7 @@ import time
 
 
 def authorNames(author):
+    """Pull author names from a set of commit authors."""
     author = author.author
     if author is not None:
         return author.login
@@ -85,6 +86,7 @@ def authorNames(author):
 
 
 def checkReadme(obj):
+    """Check the README file for a repository."""
     try:
         readme = obj.get_readme()
         textcontent = str(readme.decoded_content)
@@ -239,6 +241,8 @@ with open('./gh.token') as f:
 
 g = Github(gh_token[2])
 
+tzdiff =
+
 repoupdates = []
 skipped = []
 val = 0
@@ -249,7 +253,10 @@ for j in offsets:
     for i in repolist:
         val = val + 1
         url = i['url'].split('/')
-        repoIdx = url.index('github.com')
+        try:
+            repoIdx = url.index('github.com')
+        except ValueError:
+            continue
         if len(url) > repoIdx + 2:
             ownerName = url[repoIdx + 1]
             repoName = url[repoIdx + 2]
@@ -260,7 +267,7 @@ for j in offsets:
                 print(e)
                 left = g.get_rate_limit()
                 resetPoint = (left.core.reset
-                              - datetime.now()).total_seconds() - 28800
+                              - datetime.utcnow()).total_seconds()
                 print('We need to wait ' + "{:.2f}".format(resetPoint)
                       + ' seconds until rate reset.')
                 for ctd in range(int(resetPoint), 0, -30):
