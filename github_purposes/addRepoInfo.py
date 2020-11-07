@@ -197,13 +197,28 @@ graph = Graph(**data)
 
 tx = graph.begin()
 
-cypher = """
+cypherES = """
+    MATCH (kw:KEYWORD)
+    WHERE kw.keyword CONTAINS('earth') OR kw.keyword CONTAINS('paleo')
+    WITH kw
+    MATCH (db:dataCat)<-[:Body]-(:ANNOTATION)-[:hasKeyword]->(kw)
+    WITH db
+    MATCH (cr:codeRepo)<-[:Target]-(:ANNOTATION)-[:Target]->(db)
+    WHERE NOT EXISTS(cr.meta)
+    WITH DISTINCT cr.url AS url, db.name AS name, rand() AS random
+    ORDER BY random
+    RETURN url
+    SKIP toInteger($offset)
+    LIMIT 20
+    """
+
+cypherAll = """
     MATCH (cr:codeRepo)
     WHERE NOT EXISTS(cr.meta)
-    WITH cr, rand() AS random
-    ORDER BY random DESC
-    RETURN cr.url AS url
-    SKIP $offset
+    WITH DISTINCT cr.url AS url, rand() AS random
+    ORDER BY random
+    RETURN url
+    SKIP toInteger($offset)
     LIMIT 20
     """
 
@@ -246,7 +261,9 @@ skipped = []
 val = 0
 
 for j in offsets:
-    repolist = graph.run(cypher, {'offset': j}).data()
+    repolist = graph.run(cypherES, {'offset': j}).data()
+    if len(repolist) == 0:
+        repolist = graph.run(cypherAll, {'offset': j}).data()
     print(str(val) + ' of ' + str(total_repos))
     for i in repolist:
         val = val + 1
