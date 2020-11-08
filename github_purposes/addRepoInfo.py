@@ -286,13 +286,15 @@ for j in offsets:
                 print('Hit rate limit at '
                       + currenthome.strftime("%m/%d/%Y, %H:%M:%S"))
                 resetPoint = (left.core.reset
-                              - datetime.utcnow()).total_seconds()
+                              - currentUTC).total_seconds()
                 print('We need to wait ' + "{:.2f}".format(resetPoint/60)
                       + ' minutes until rate reset.')
-                for i in range(resetPoint):
+                for i in range(resetPoint + 60):
                     time.sleep(1)
                     if (i % 60) == 0:
                         print('.', end="")
+                print('Ended wait at '
+                      + datetime.now().strftime("%m/%d/%Y, %H:%M:%S"))
             except Exception as e:
                 print(e)
                 # If we don't get the right repository, we can check to see
