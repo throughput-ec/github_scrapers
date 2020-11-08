@@ -281,18 +281,18 @@ for j in offsets:
             except RateLimitExceededException as e:
                 print(e)
                 left = g.get_rate_limit()
+                currentUTC = datetime.utcnow()
+                currenthome = datetime.now()
+                print('Hit rate limit at '
+                      + currenthome.strftime("%m/%d/%Y, %H:%M:%S"))
                 resetPoint = (left.core.reset
                               - datetime.utcnow()).total_seconds()
-                print('We need to wait ' + "{:.2f}".format(resetPoint)
-                      + ' seconds until rate reset.')
-                for ctd in range(int(resetPoint), 0, -30):
-                    time.sleep(30)
-                    resettime = (left.core.reset
-                                 - datetime.now()).total_seconds() - 28800
-                    print("{:.1f}".format(resettime)
-                          + ' seconds until rate reset.')
-                    if int(resettime) < 0:
-                        break
+                print('We need to wait ' + "{:.2f}".format(resetPoint/60)
+                      + ' minutes until rate reset.')
+                for i in range(resetPoint):
+                    time.sleep(1)
+                    if (i % 60) == 0:
+                        print('.', end="")
             except Exception as e:
                 print(e)
                 # If we don't get the right repository, we can check to see
