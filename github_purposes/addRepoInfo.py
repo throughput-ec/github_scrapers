@@ -289,7 +289,7 @@ for j in offsets:
                               - currentUTC).total_seconds()
                 print('We need to wait ' + "{:.2f}".format(resetPoint/60)
                       + ' minutes until rate reset.')
-                for i in range(resetPoint + 60):
+                for i in range(int(resetPoint) + 60):
                     time.sleep(1)
                     if (i % 60) == 0:
                         print('.', end="")
