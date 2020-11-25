@@ -86,7 +86,7 @@ for db in dbs:
             continue
         except Exception as inst:
             print(inst)
-            if inst['message'] = "Repository access blocked":
+            if inst['message'] == "Repository access blocked":
                 break
             sleep(120)
             k = k + 1

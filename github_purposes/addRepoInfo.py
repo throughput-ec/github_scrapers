@@ -288,11 +288,11 @@ for j in offsets:
                 resetPoint = (left.core.reset
                               - currentUTC).total_seconds()
                 print('We need to wait ' + "{:.2f}".format(resetPoint/60)
-                      + ' minutes until rate reset.')
+                      + ' minutes (' + "{:.0f}".format(resetPoint) + 's) until rate reset.')
                 for wait in range(int(resetPoint) + 60):
                     time.sleep(1)
                     if (wait % 60) == 0:
-                        print('.', end="")
+                        print(str(wait) + '.', end="", flush=True)
                 print('Ended wait at '
                       + datetime.now().strftime("%m/%d/%Y, %H:%M:%S"))
             except Exception as e:
