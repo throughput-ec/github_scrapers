@@ -76,100 +76,14 @@ from datetime import datetime
 import time
 
 
-def authorNames(author):
-    """Pull author names from a set of commit authors."""
-    author = author.author
-    if author is not None:
-        return author.login
-    else:
-        return None
-
-
 def checkReadme(obj):
     """Check the README file for a repository."""
     try:
         readme = obj.get_readme()
         textcontent = str(readme.decoded_content)
-        # The following regex matches badges:
-        badges = len(re.findall(r'\[!\[.+?]\(.+?\)\]\(http.+?\)', textcontent))
-        headings = len(re.findall(r'##+\s', textcontent))
-        readme = {'readme': True,
-                  'badges': badges,
-                  'headings': headings,
-                  'char': len(textcontent)}
     except Exception:
-        readme = {'readme': False,
-                  'badges': None,
-                  'headings': None,
-                  'char': None}
-    try:
-        license = obj.get_license().license.name
-    except Exception:
-        license = None
-    return {'readme': readme, 'license': license}
-
-
-def toString(dt):
-    """Convert datetime object to string."""
-    return dt.strftime("%Y-%m-%d (%H:%M:%S.%f)")
-
-
-def checkRepo(obj):
-    """Return repository information.
-
-    obj A pyGithub ContentFile object.
-    """
-    created = toString(obj.created_at)
-    # Check commit information:
-    commits = obj.get_commits()
-    commitCount = commits.totalCount
-    description = obj.description
-    lastCommit = toString(commits[0].commit.author.date)
-    firstCommit = toString(commits[-1].commit.author.date)
-    authors = set(map(lambda x: authorNames(x), commits))
-    issues = obj.get_issues().totalCount
-    branches = obj.get_branches().totalCount
-    forks = obj.forks_count
-    watchers = obj.watchers_count
-    stars = obj.stargazers_count
-    isFork = obj.fork
-    languages = requests.get(obj.languages_url).json()
-    return {'id': obj.id,
-            'repo': obj.name,
-            'owner': obj.owner.login,
-            'name': obj.owner.login + '/' + obj.name,
-            'url': obj.html_url,
-            'created': created,
-            'description': description,
-            'topics': obj.get_topics(),
-            'readme': checkReadme(obj),
-            'commits': {'totalCommits': commitCount,
-                        'range': [firstCommit, lastCommit],
-                        'authors': list(authors)},
-            'languages': languages,
-            'stars': stars,
-            'forks': forks,
-            'fork': isFork,
-            'issues': issues,
-            'branches': branches,
-            'watchers': watchers,
-            'checkdate': toString(datetime.now())
-            }
-
-
-def emptyNone(val):
-    """Clean out None values.
-
-    val A Python object that may or may not have None values.
-    returns a Python object with all None values replaced by ''.
-    """
-    for k in val.keys():
-        if type(val[k]) is dict:
-            emptyNone(val[k])
-        else:
-            if val[k] is None:
-                val[k] = ''
-    return val
+        textcontent = None
+    return {'repo': obj.full_name, 'readme': textcontent}
 
 
 with open('.gitignore') as gi:
@@ -204,10 +118,9 @@ cypherES = """
     MATCH (db:dataCat)<-[:Body]-(:ANNOTATION)-[:hasKeyword]->(kw)
     WITH db
     MATCH (cr:codeRepo)<-[:Target]-(:ANNOTATION)-[:Target]->(db)
-    WHERE NOT EXISTS(cr.meta) AND NOT EXISTS(cr.status)
-    WITH DISTINCT cr.url AS url, db.name AS name, rand() AS random
+    WITH DISTINCT cr.id AS id, cr.url AS url, db.name AS name, rand() AS random
     ORDER BY random
-    RETURN url
+    RETURN id, url
     SKIP toInteger($offset)
     LIMIT 20
     """
@@ -215,29 +128,11 @@ cypherES = """
 cypherAll = """
     MATCH (cr:codeRepo)
     WHERE NOT EXISTS(cr.meta)
-    WITH DISTINCT cr.url AS url, rand() AS random
+    WITH DISTINCT cr.id AS id, cr.url AS url, rand() AS random
     ORDER BY random
-    RETURN url
+    RETURN id, url
     SKIP toInteger($offset)
     LIMIT 20
-    """
-
-add_meta = """
-    MATCH (cr:codeRepo)
-    WHERE cr.url = $url OR cr.id = $id
-    SET cr.id = $id
-    SET cr.meta = toString($meta)
-    SET cr.url = $url
-    SET cr.name = $name
-    SET cr.status = NULL
-    RETURN 'okay'
-    """
-
-add_dead = """
-    MATCH (cr:codeRepo)
-    WHERE cr.url = $url
-    SET cr.status = 404
-    RETURN 'okay'
     """
 
 cypher_count = """
@@ -256,13 +151,18 @@ with open('./gh.token') as f:
 
 g = Github(gh_token[2])
 
+with open('readmes.json', 'r') as f:
+    readmes = json.load(f)
+
 repoupdates = []
 skipped = []
 val = 0
 
 for j in offsets:
-    repolist = graph.run(cypherAll, {'offset': j}).data()
-    if len(repolist) == 0:
+    with open('readmes.json', 'w') as f:
+        json.dump(readmes, f)
+    repolist = graph.run(cypherES, {'offset': j}).data()
+    if len(repolist) < 20:
         repolist = graph.run(cypherAll, {'offset': j}).data()
     print(str(val) + ' of ' + str(total_repos))
     for i in repolist:
@@ -275,7 +175,8 @@ for j in offsets:
         if len(url) > repoIdx + 2:
             ownerName = url[repoIdx + 1]
             repoName = url[repoIdx + 2]
-        # testRepoName = i['cr']['name']
+            if (ownerName + '/' + repoName) in [k['repo'] for k in readmes]:
+                continue
             try:
                 repo = g.get_repo(ownerName + '/' + repoName)
             except RateLimitExceededException as e:
@@ -310,23 +211,15 @@ for j in offsets:
                         repo = g.get_repo(ownerName + '/' + indices[0])
                     else:
                         # We got a 404 and couldn't find anything matching.
-                        bb = graph.run(add_dead, {'url': i['url']})
                         print('Hit a 404 for ' + i['url'])
                         continue
                 except Exception:
-                    bb = graph.run(add_dead, {'url': i['url']})
                     print('Hit a 404 for ' + i['url'])
                     continue
             try:
-                repoInfo = checkRepo(repo)
-                repoupdates.append(repoInfo)
-                uploadObj = {'meta': json.dumps(repoInfo),
-                             'id': repoInfo['id'],
-                             'name': repoInfo['name'],
-                             'url': repoInfo['url']}
-                aa = graph.run(add_meta, uploadObj)
+                readmes.append(checkReadme(repo))
                 print(i['url'])
             except Exception as e:
                 print(e)
                 skipped.append(i['url'])
-                print('Couldn\'t upload for ' + i['url'])
+                print('Couldn\'t get readme for ' + i['url'])
