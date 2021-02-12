@@ -1,3 +1,5 @@
+"""Parsing Markdown README files using pypandoc."""
+
 import json
 import pypandoc
 import re
@@ -66,5 +68,5 @@ for i in range(len(readmes)):
         print('oops.')
     if i % 100 == 0:
         print('Writing. . . ')
-        with open('readmejson.json', 'a') as f:
+        with open('readmejson.json', 'w') as f:
             json.dump(output, f)
