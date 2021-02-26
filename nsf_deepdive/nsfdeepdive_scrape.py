@@ -78,6 +78,13 @@ cypher = """
     WHERE (NOT gt.name IN goodies)
     RETURN DISTINCT gt.AwardID AS award"""
 
+lastPull = """
+    MATCH (o:OBJECT)
+    WHERE o.value CONTAINS("github_deepdive")
+    MATCH (o)-[]-(a:ANNOTATION)
+    RETURN datetime({epochMillis: max(a.created)})
+    """
+
 print("Matching existing repositories")
 grants = graph.run(cypher).data()
 
@@ -87,8 +94,8 @@ grantUnlinked = list(map(lambda x: x['award'], grants))
 grants = set(grantUnlinked) - set(awards)
 grants = list(grants)
 
-print("Matching " + str(len(grants)) + " of " +
-      str(grant_tot[0]['tot']) + " research awards.")
+print("Matching " + str(len(grants)) + " of "
+      + str(grant_tot[0]['tot']) + " research awards.")
 
 thing = 0
 maxhits = 0
