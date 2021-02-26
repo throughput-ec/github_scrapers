@@ -261,11 +261,13 @@ skipped = []
 val = 0
 
 for j in offsets:
+    time.sleep(1)
     repolist = graph.run(cypherAll, {'offset': j}).data()
     if len(repolist) == 0:
         repolist = graph.run(cypherAll, {'offset': j}).data()
     print(str(val) + ' of ' + str(total_repos))
     for i in repolist:
+        time.sleep(1)
         val = val + 1
         url = i['url'].split('/')
         try:

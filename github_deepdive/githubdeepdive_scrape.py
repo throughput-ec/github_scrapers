@@ -68,14 +68,13 @@ maxhits = 0
 
 # This will generate a large-ish number of papers and grants.
 gddurl = ("https://geodeepdive.org/api/snippets?"
-          + "term=gitlab.com,bitbucket.com,github.com&clean&full_results")
+          + "term=gitlab.com,bitbucket.com,github.com"
+          + "&clean&full_results&min_acquired=2M")
 
 hits = True
 paperCt = 0
 
 while hits:
-    with open('data/papersout.json', 'w') as file:
-        json.dump(paperset, file)
     print('Have run ' + str(paperCt)
           + ' papers, looking for ' + str(maxhits))
     try:
@@ -106,19 +105,23 @@ while hits:
                 paperCt = paperCt + 1
 
 good_list = [i for i in paperset['good'].values()]
+k = 0
 
-for rec in good_list:
-    if rec['url'] is None:
-        paperset['bad'] = rec
-        paperset['good'].remove(rec)
+goodrec = []
+badrec = []
+
+for rec in range(len(good_list)):
+    if good_list[rec]['url'] is None:
+        badrec.append(good_list[rec])
     else:
-        rec['url'] = 'http://' + rec['url']
+        good_list[rec]['url'] = 'http://' + good_list[rec]['url']
+        goodrec.append(good_list[rec])
 
 with open('data/papersout.json', 'w') as file:
     json.dump(paperset, file)
 
 with open('data/papersgood.json', 'w') as file:
-    json.dump(good_list, file)
+    json.dump(goodrec, file)
 
 
 # Connect to the graph database
@@ -134,13 +137,11 @@ tx = graph.begin()
 
 # Link the papers to the github repositories:
 rep_run = 0
-for i in good_list:
+for i in goodrec[2087:]:
     rep_run = rep_run + 1
     if i['url'] is not None:
         i['url'] = re.sub(r'^g', 'https://g', i['url'])
-        i['url'] = re.sub(r'^http:', 'https:', i['url'])
-        i['url'] = re.sub(r'^https://https://github',
-                          'https://github', i['url'])
+        i['url'] = re.sub(r'^(http[s]*://)*', 'https://', i['url'])
         k = 0
         for j in i['papers']:
             k = k + 1
