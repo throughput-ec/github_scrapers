@@ -43,7 +43,8 @@ def parseJsonHeaders(parsed):
 
 
 def splitDoc(input):
-    parsed = pypandoc.convert_text(re.sub(r'\\n', r'\n', input), 'json', format='md')
+    parsed = pypandoc.convert_text(re.sub(r'\\n', r'\n', input),
+                                   'json', format='md')
     chunked = parseJsonHeaders(parsed)
     return chunked
 
@@ -51,7 +52,7 @@ def splitDoc(input):
 output = []
 
 for i in range(len(readmes)):
-    print(i, end=' ', flush = True)
+    print(i, end=' ', flush=True)
     object = readmes[i]['readme']
     if object is None:
         continue
@@ -60,12 +61,12 @@ for i in range(len(readmes)):
     doc = object.strip(' \\n')
     if len(doc) > 200000:
         continue
-    parsed = {'repo': readmes[i]['repo'], 'sections':[]}
+    parsed = {'repo': readmes[i]['repo'], 'sections': []}
     try:
         parsed['sections'] = splitDoc(doc)
         output.append(parsed)
-    except:
-        print('oops.')
+    except Exception as e:
+        print('oops: ' + str(e))
     if i % 100 == 0:
         print('Writing. . . ')
         with open('readmejson.json', 'w') as f:

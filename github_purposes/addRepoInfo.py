@@ -71,7 +71,7 @@ import json
 import requests
 import re
 import os
-from github import Github, RateLimitExceededException
+import github3
 from datetime import datetime
 import time
 
@@ -88,8 +88,8 @@ def authorNames(author):
 def checkReadme(obj):
     """Check the README file for a repository."""
     try:
-        readme = obj.get_readme()
-        textcontent = str(readme.decoded_content)
+        readme = obj.readme()
+        textcontent = str(readme.decoded)
         # The following regex matches badges:
         badges = len(re.findall(r'\[!\[.+?]\(.+?\)\]\(http.+?\)', textcontent))
         headings = len(re.findall(r'##+\s', textcontent))
@@ -103,7 +103,7 @@ def checkReadme(obj):
                   'headings': None,
                   'char': None}
     try:
-        license = obj.get_license().license.name
+        license = obj.license().license.name
     except Exception:
         license = None
     return {'readme': readme, 'license': license}
@@ -121,19 +121,19 @@ def checkRepo(obj):
     """
     created = toString(obj.created_at)
     # Check commit information:
-    commits = obj.get_commits()
-    commitCount = commits.totalCount
+    commits = [i for i in obj.commits()]
+    commitCount = sum(obj.weekly_commit_count()['all'])
     description = obj.description
-    lastCommit = toString(commits[0].commit.author.date)
-    firstCommit = toString(commits[-1].commit.author.date)
+    lastCommit = toString(obj.pushed_at)
+    firstCommit = toString(obj.created_at)
     authors = set(map(lambda x: authorNames(x), commits))
-    issues = obj.get_issues().totalCount
-    branches = obj.get_branches().totalCount
+    issues = obj.open_issues
+    branches = len([i for i in obj.branches()])
     forks = obj.forks_count
     watchers = obj.watchers_count
     stars = obj.stargazers_count
     isFork = obj.fork
-    languages = requests.get(obj.languages_url).json()
+    languages = json.dumps([{i[0]:i[1]} for i in obj.languages()])
     return {'id': obj.id,
             'repo': obj.name,
             'owner': obj.owner.login,
@@ -141,7 +141,7 @@ def checkRepo(obj):
             'url': obj.html_url,
             'created': created,
             'description': description,
-            'topics': obj.get_topics(),
+            'topics': obj.topics().names,
             'readme': checkReadme(obj),
             'commits': {'totalCommits': commitCount,
                         'range': [firstCommit, lastCommit],
@@ -197,77 +197,40 @@ graph = Graph(**data)
 
 tx = graph.begin()
 
-cypherES = """
-    MATCH (kw:KEYWORD)
-    WHERE kw.keyword CONTAINS('earth') OR kw.keyword CONTAINS('paleo')
-    WITH kw
-    MATCH (db:dataCat)<-[:Body]-(:ANNOTATION)-[:hasKeyword]->(kw)
-    WITH db
-    MATCH (cr:codeRepo)<-[:Target]-(:ANNOTATION)-[:Target]->(db)
-    WHERE NOT EXISTS(cr.meta) AND NOT EXISTS(cr.status)
-    WITH DISTINCT cr.url AS url, db.name AS name, rand() AS random
-    ORDER BY random
-    RETURN url
-    SKIP toInteger($offset)
-    LIMIT 20
-    """
 
-cypherAll = """
-    MATCH (cr:codeRepo)
-    WHERE NOT EXISTS(cr.meta)
-    WITH DISTINCT cr.url AS url, rand() AS random
-    ORDER BY random
-    RETURN url
-    SKIP toInteger($offset)
-    LIMIT 20
-    """
-
-add_meta = """
-    MATCH (cr:codeRepo)
-    WHERE cr.url = $url OR cr.id = $id
-    SET cr.id = $id
-    SET cr.meta = toString($meta)
-    SET cr.url = $url
-    SET cr.name = $name
-    SET cr.status = NULL
-    RETURN 'okay'
-    """
-
-add_dead = """
-    MATCH (cr:codeRepo)
-    WHERE cr.url = $url
-    SET cr.status = 404
-    RETURN 'okay'
-    """
-
-cypher_count = """
-    MATCH (cr:codeRepo)
-    WHERE NOT (EXISTS(cr.meta) OR EXISTS(cr.status))
-    RETURN COUNT(DISTINCT cr) AS total
-    """
+add_meta = open('./cql/addMeta.cql').read()
+cypherAll = open('./cql/cypherAll.cql').read()
+add_dead = open('./cql/addDead.cql').read()
+cypher_count = open('./cql/cypherCount.cql').read()
+cypherES = open('./cql/earthsciCypher.cql').read()
 
 print("Matching existing repositories")
 total_repos = graph.run(cypher_count).data()[0]['total']
 
 offsets = range(0, total_repos, 20)
 
-with open('./gh.token') as f:
-    gh_token = f.read().splitlines()
+# Here's the login for GitHub:
+with open('./throughput-data-loader.2021-05-04.private-key.pem') as f:
+    pemfile = f.read()
 
-g = Github(gh_token[2])
+g = github3.github.GitHub()
+g.login_as_app(pemfile.encode(), '32829')
+
+installations = [installation.id for installation in g.app_installations()]
+g.login_as_app_installation(pemfile.encode(), '32829', installations[0])
+
+# Back to the rest.
 
 repoupdates = []
 skipped = []
 val = 0
 
 for j in offsets:
-    time.sleep(1)
     repolist = graph.run(cypherAll, {'offset': j}).data()
     if len(repolist) == 0:
         repolist = graph.run(cypherAll, {'offset': j}).data()
     print(str(val) + ' of ' + str(total_repos))
     for i in repolist:
-        time.sleep(1)
         val = val + 1
         url = i['url'].split('/')
         try:
@@ -279,24 +242,24 @@ for j in offsets:
             repoName = url[repoIdx + 2]
         # testRepoName = i['cr']['name']
             try:
-                repo = g.get_repo(ownerName + '/' + repoName)
-            except RateLimitExceededException as e:
-                print(e)
-                left = g.get_rate_limit()
-                currentUTC = datetime.utcnow()
-                currenthome = datetime.now()
-                print('Hit rate limit at '
-                      + currenthome.strftime("%m/%d/%Y, %H:%M:%S"))
-                resetPoint = (left.core.reset
-                              - currentUTC).total_seconds()
-                print('We need to wait ' + "{:.2f}".format(resetPoint/60)
-                      + ' minutes (' + "{:.0f}".format(resetPoint) + 's) until rate reset.')
-                for wait in range(int(resetPoint) + 60):
-                    time.sleep(1)
-                    if (wait % 60) == 0:
-                        print(str(wait) + '.', end="", flush=True)
-                print('Ended wait at '
-                      + datetime.now().strftime("%m/%d/%Y, %H:%M:%S"))
+                repo = g.repository(ownerName, repoName)
+            # except RateLimitExceededException as e:
+            #     print(e)
+            #     left = g.get_rate_limit()
+            #     currentUTC = datetime.utcnow()
+            #     currenthome = datetime.now()
+            #     print('Hit rate limit at '
+            #           + currenthome.strftime("%m/%d/%Y, %H:%M:%S"))
+            #     resetPoint = (left.core.reset
+            #                   - currentUTC).total_seconds()
+            #     print('We need to wait ' + "{:.2f}".format(resetPoint/60)
+            #           + ' minutes (' + "{:.0f}".format(resetPoint) + 's) until rate reset.')
+            #     for wait in range(int(resetPoint) + 60):
+            #         time.sleep(1)
+            #         if (wait % 60) == 0:
+            #             print(str(wait) + '.', end="", flush=True)
+            #     print('Ended wait at '
+            #           + datetime.now().strftime("%m/%d/%Y, %H:%M:%S"))
             except Exception as e:
                 print(e)
                 # If we don't get the right repository, we can check to see
